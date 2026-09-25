@@ -1,22 +1,41 @@
- const express= require('express');
- require('./DataBase/config');
+const express= require('express');
  const cors=require('cors');
-   const user=require("./DataBase/users");
-// const users = require('./DataBase/users');
+require("./db/config");
+  const user=require("./db/users");
 
- const app=express();
-   app.use(express.json());
-   app.use(cors());
-   
-  app.post("/register",async (req,resp)=>{
-     console.log("Body:",req.body);
-           let user1= new user(req.body);
-                console.log(" beforsaveBody:",req.body);
+    
+const app=express();
+app.use(cors());
 
-             user1= await user1.save();
-                  console.log("after save:",req.body);
+  app.use(express.json());
 
-             resp.send(user1);
+  app.post("/register", async (req,resp)=>{
+             let user1=new user(req.body);
+               
+             user1=await user1.save();
+
+
+            resp.send(user1);
+
   })
 
-  app.listen(5000);
+  app.post("/login", async (req,resp)=>{
+       
+          if(req.body.email && req.body.pass){
+          
+             let luser= await user.findOne(req.body).select("-pass");
+             if(luser){
+              resp.send(luser);
+             }else{
+                     resp.send({result : "++User is Not found"});
+
+              }
+            
+            
+            } else{
+                     resp.send({result : "!!User is Not found"});
+              }  
+  })
+
+  app.listen(8000);
+
