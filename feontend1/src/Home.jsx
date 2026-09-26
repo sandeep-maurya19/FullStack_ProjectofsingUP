@@ -199,7 +199,7 @@ function Home() {
           <div style={cardStyle}>
             <div style={iconStyle}>🧑‍🌾</div>
 
-            <h3 style={headingStyle}>Farmer Support</h3>
+            <h3 style={headingStyle}><Link  to="/chekout2" >Advance Weather</Link></h3>
 
             <p style={textStyle}>
               Access useful resources and information created with

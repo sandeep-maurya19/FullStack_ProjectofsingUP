@@ -87,5 +87,136 @@ app.use(cors());
   }
 });
 
+
+  app.post("/wheader2", async (req, res) => {
+
+  try {
+
+    const { city } = req.body;
+
+    // Check city
+    if (!city) {
+      return res.status(400).json({
+        message: "City name is required"
+      });
+    }
+
+
+    // ========================================
+    // STEP 1
+    // City -> Latitude / Longitude
+    // ========================================
+
+    const geoResponse = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`
+    );
+
+    const geoData = await geoResponse.json();
+
+
+    if (
+      !geoData.results ||
+      geoData.results.length === 0
+    ) {
+      return res.status(404).json({
+        message: "City not found"
+      });
+    }
+
+
+    const location = geoData.results[0];
+
+    const latitude = location.latitude;
+    const longitude = location.longitude;
+
+    const cityName = location.name;
+    const country = location.country;
+
+
+    // ========================================
+    // STEP 2
+    // Get Weather + Forecast
+    // ========================================
+
+    const weatherResponse = await fetch(
+      `https://api.open-meteo.com/v1/forecast` +
+      `?latitude=${latitude}` +
+      `&longitude=${longitude}` +
+      `&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m` +
+      `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max` +
+      `&forecast_days=7` +
+      `&timezone=auto`
+    );
+
+
+    const weatherData = await weatherResponse.json();
+
+
+    // ========================================
+    // STEP 3
+    // Send useful data to React
+    // ========================================
+
+    res.json({
+
+      location: {
+        city: cityName,
+        country: country,
+
+        latitude: latitude,
+        longitude: longitude
+      },
+
+
+      current: {
+
+        temperature:
+          weatherData.current.temperature_2m,
+
+        humidity:
+          weatherData.current.relative_humidity_2m,
+
+        precipitation:
+          weatherData.current.precipitation,
+
+        windSpeed:
+          weatherData.current.wind_speed_10m
+      },
+
+
+      forecast: {
+
+        dates:
+          weatherData.daily.time,
+
+        maxTemperature:
+          weatherData.daily.temperature_2m_max,
+
+        minTemperature:
+          weatherData.daily.temperature_2m_min,
+
+        rainfall:
+          weatherData.daily.precipitation_sum,
+
+        rainProbability:
+          weatherData.daily.precipitation_probability_max
+      }
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Weather server error"
+    });
+
+  }
+
+});
+
+
+
   app.listen(8000);
 

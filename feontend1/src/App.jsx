@@ -11,6 +11,7 @@ import Usernot from './Usernot'
 import Home from './Home'
 import About from './About'
 import CheckW from './CheckW'
+import CheckW2 from './CheckW2'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,6 +27,8 @@ function App() {
               <Route  path='/login1' element={<Login/>} />
                <Route  path='/error' element={<Usernot/>} />
                 <Route  path='/chekout1' element={<CheckW/>} />
+               <Route  path='/chekout2' element={<CheckW2/>} />
+
 
                
 
