@@ -1,0 +1,433 @@
+/* =====================================
+   WEATHER PAGE
+===================================== */
+
+.weather-page {
+  min-height: 100vh;
+  width: 100%;
+
+  padding: 70px 20px;
+
+  color: #ffffff;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(56, 189, 248, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(99, 102, 241, 0.22),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #061525,
+      #0b2138,
+      #101f46
+    );
+
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =====================================
+   BACKGROUND DECORATION
+===================================== */
+
+.weather-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  top: -100px;
+  right: 10%;
+
+  border-radius: 50%;
+
+  background: rgba(56, 189, 248, 0.12);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+.weather-page::after {
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  bottom: -150px;
+  left: 5%;
+
+  border-radius: 50%;
+
+  background: rgba(99, 102, 241, 0.12);
+
+  filter: blur(90px);
+
+  pointer-events: none;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.weather-header {
+  position: relative;
+  z-index: 2;
+
+  max-width: 700px;
+
+  margin: 0 auto 35px;
+
+  text-align: center;
+}
+
+
+/* Small Label */
+
+.weather-label {
+  display: inline-block;
+
+  margin: 0 0 12px;
+
+  padding: 7px 14px;
+
+  border-radius: 50px;
+
+  color: #7dd3fc;
+
+  background: rgba(56, 189, 248, 0.1);
+
+  border: 1px solid rgba(56, 189, 248, 0.2);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 2px;
+}
+
+
+/* Main Heading */
+
+.weather-header h1 {
+  margin: 0;
+
+  font-size: clamp(36px, 6vw, 58px);
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #bae6fd,
+      #ffffff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Subtitle */
+
+.weather-subtitle {
+  margin: 15px 0 0;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================
+   SEARCH AREA
+===================================== */
+
+.weather-search {
+  position: relative;
+  z-index: 2;
+
+  width: min(700px, 100%);
+
+  margin: 0 auto 20px;
+
+  padding: 10px;
+
+  display: flex;
+
+  gap: 10px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =====================================
+   INPUT BOX
+===================================== */
+
+.search-box {
+  flex: 1;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 15px;
+
+  border-radius: 13px;
+
+  background: rgba(0, 0, 0, 0.18);
+
+  border: 1px solid transparent;
+
+  transition: 0.25s ease;
+}
+
+.search-box:focus-within {
+  border-color: rgba(56, 189, 248, 0.5);
+
+  background: rgba(0, 0, 0, 0.25);
+
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.08);
+}
+
+
+/* Search Icon */
+
+.search-icon {
+  color: #7dd3fc;
+
+  font-size: 28px;
+
+  line-height: 1;
+
+  transform: rotate(-20deg);
+}
+
+
+/* Input */
+
+.search-box input {
+  width: 100%;
+
+  height: 54px;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-family: inherit;
+}
+
+.search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.weather-button {
+  height: 54px;
+
+  padding: 0 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  cursor: pointer;
+
+  color: #062033;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7dd3fc,
+      #38bdf8
+    );
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 8px 25px rgba(56, 189, 248, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.weather-button span {
+  font-size: 20px;
+
+  transition: transform 0.2s ease;
+}
+
+.weather-button:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(
+      135deg,
+      #bae6fd,
+      #38bdf8
+    );
+
+  box-shadow:
+    0 12px 30px rgba(56, 189, 248, 0.35);
+}
+
+.weather-button:hover span {
+  transform: translateX(4px);
+}
+
+.weather-button:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================
+   WEATHER RESULT AREA
+===================================== */
+
+.weather-page > .weather-container {
+  position: relative;
+  z-index: 1;
+
+  min-height: auto;
+
+  padding: 30px 0 0;
+
+  background: transparent;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 600px) {
+
+  .weather-page {
+    padding: 45px 15px;
+  }
+
+  .weather-header {
+    margin-bottom: 25px;
+  }
+
+  .weather-header h1 {
+    font-size: 38px;
+
+    letter-spacing: -1.5px;
+  }
+
+  .weather-subtitle {
+    font-size: 14px;
+  }
+
+  .weather-search {
+    flex-direction: column;
+
+    padding: 8px;
+
+    border-radius: 18px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .weather-button {
+    width: 100%;
+  }
+
+  .weather-page > .weather-container {
+    padding-top: 20px;
+  }
+}
+
+
+/* =====================================
+   SMALL MOBILE
+===================================== */
+
+@media (max-width: 380px) {
+
+  .weather-page {
+    padding: 35px 12px;
+  }
+
+  .weather-header h1 {
+    font-size: 32px;
+  }
+
+  .weather-label {
+    font-size: 9px;
+
+    letter-spacing: 1.5px;
+  }
+}

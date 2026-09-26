@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 
+import { Link } from "react-router-dom";
+
 function Home() {
   return (
     <div
@@ -185,7 +187,7 @@ function Home() {
           <div style={cardStyle}>
             <div style={iconStyle}>🌦️</div>
 
-            <h3 style={headingStyle}>Weather Updates</h3>
+            <h3 style={headingStyle}><Link to="/chekout1" >Weather Information</Link></h3>
 
             <p style={textStyle}>
               Get weather information to help you plan your farming

@@ -36,6 +36,56 @@ app.use(cors());
                      resp.send({result : "!!User is Not found"});
               }  
   })
+    
+ app.post("/wheader", async (req, resp) => {
+  try {
+    const city = req.body.city;
+
+    const whed1 = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
+    );
+
+    const whed1info = await whed1.json();
+
+    // City check
+    if (!whed1info.results || whed1info.results.length === 0) {
+      return resp.status(404).json({
+        message: "City is not found",
+      });
+    }
+
+    // Get location information
+    const {
+      latitude,
+      longitude,
+      name,
+      country,
+    } = whed1info.results[0];
+
+    // Get weather
+    const wheder2 = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`
+    );
+
+    const wheder2info = await wheder2.json();
+
+    // Send response to frontend
+    resp.json({
+      city: name,
+      country: country,
+      temperature: wheder2info.current.temperature_2m,
+      humidity: wheder2info.current.relative_humidity_2m,
+      windSpeed: wheder2info.current.wind_speed_10m,
+    });
+
+  } catch (error) {
+    console.log(error);
+
+    resp.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+});
 
   app.listen(8000);
 
