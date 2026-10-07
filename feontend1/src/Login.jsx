@@ -11,7 +11,7 @@ function Login(){
      const naviget=useNavigate();
 
     async function handle(){
-             let result = await fetch('http://localhost:5200/login',{
+             let result = await fetch('https://fullstack-projectofsingup-2.onrender.com/login',{
                 method:"post",
                 body:JSON.stringify({email,pass}),
                 headers:{

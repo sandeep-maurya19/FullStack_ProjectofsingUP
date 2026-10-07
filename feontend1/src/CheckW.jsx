@@ -7,7 +7,7 @@ function CheckW() {
   const [weather, setweather] = useState(null);
 
   async function handl() {
-    let result = await fetch("http://localhost:5200/wheader", {
+    let result = await fetch("https://fullstack-projectofsingup-2.onrender.com/wheader", {
       method: "post",
       body: JSON.stringify({ city }),
       headers: {
