@@ -10,7 +10,7 @@ function CheckW2() {
   async function handl() {
     let result = await fetch("http://localhost:8000/wheader2", {
       method: "post",
-      body: JSON.stringify({ city }),
+      body: JSON.stringify({ city}),
       headers: {
         "Content-Type": "application/json",
       },
@@ -39,19 +39,19 @@ function CheckW2() {
           <span className="search-icon">⌕</span>
 
           <input
-            type="text"
-            value={city}
+            type= "text"
+            value = {city}
             onChange={(e) => {
               setcity(e.target.value);
             }}
-            placeholder="Enter your city name..."
+            placeholder= "Enter your city name..."
           />
         </div>
 
         <button
-          type="button"
-          onClick={handl}
-          className="weather-button"
+          type= "button"
+          onClick  = { handl}
+          className= "weather-button"
         >
           Check Weather
           <span>→</span>
