@@ -7,7 +7,7 @@ function CheckW() {
   const [weather, setweather] = useState(null);
 
   async function handl() {
-    let result = await fetch("http://localhost:8000/wheader", {
+    let result = await fetch("http://localhost:5200/wheader", {
       method: "post",
       body: JSON.stringify({ city }),
       headers: {

@@ -11,7 +11,7 @@ function Login(){
      const naviget=useNavigate();
 
     async function handle(){
-             let result = await fetch('http://localhost:8000/login',{
+             let result = await fetch('http://localhost:5200/login',{
                 method:"post",
                 body:JSON.stringify({email,pass}),
                 headers:{

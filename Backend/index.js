@@ -1,13 +1,18 @@
 const express= require('express');
  const cors=require('cors');
-require("./db/config");
-  const user=require("./db/users");
+ require("dotenv").config();
+ const connect1=require("./db/config");
 
-    
+       connect1();
+
+  const user=require("./db/users");
+   
 const app=express();
 app.use(cors());
 
   app.use(express.json());
+
+  const PORT=process.env.PORT
 
   app.post("/register", async (req,resp)=>{
              let user1=new user(req.body);
@@ -218,5 +223,5 @@ app.use(cors());
 
 
 
-  app.listen(8000);
+  app.listen(PORT);
 

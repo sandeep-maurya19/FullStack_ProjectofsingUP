@@ -8,7 +8,7 @@ function CheckW2() {
   const [data, setdata] = useState(null);
 
   async function handl() {
-    let result = await fetch("http://localhost:8000/wheader2", {
+    let result = await fetch("http://localhost:5200/wheader2", {
       method: "post",
       body: JSON.stringify({ city}),
       headers: {

@@ -10,7 +10,7 @@ function SingUP() {
     const naviget = useNavigate();
     async function handle() {
 
-        let result = await fetch('http://localhost:8000/register', {
+        let result = await fetch('http://localhost:5200/register', {
             method: 'post',
             body: JSON.stringify({ name, email, pass }),
             headers: {
